@@ -1,0 +1,36 @@
+name: "Rollback deploy on Firebase Hosting"
+description: "A GitHub Action to reollback a deploy on Firebase Hosting"
+author: "Igor Gottschalg (https://github.com/igorgottschalg)"
+branding:
+  icon: "globe"
+  color: "blue"
+runs:
+  using: "node12"
+  main: "bin/action.min.js"
+inputs:
+  firebaseServiceAccount:
+    description: "Firebase service account JSON"
+    required: true
+  projectId:
+    description:
+      "The project to deploy to. If you leave this blank, make sure you check in
+      a .firebaserc file"
+    required: false
+  channelId:
+    description: "The ID of the channel to deploy to. If you leave this blank,
+      a preview channel and its ID will be auto-generated per branch or PR."
+    required: false
+  versionName:
+    description: "The versionName of deploy to rollback"
+    required: false
+  entryPoint:
+    description:
+      "The location of your firebase.json file, relative to the root of your
+      directory"
+    default: "."
+    required: false
+outputs:
+  releases:
+    description: List of releases
+  current_version:
+    description: Current deployed version

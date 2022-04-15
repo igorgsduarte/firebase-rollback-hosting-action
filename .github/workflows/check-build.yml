@@ -1,0 +1,17 @@
+name: Check build
+
+on: pull_request
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Ensure built files in branch match
+        run: git diff --ignore-space-at-eol --exit-code -- "*.min.js"
