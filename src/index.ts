@@ -52,7 +52,7 @@ async function run() {
       const versions = releases.map((release) => release.version.name);
 
       setOutput("releases", versions);
-      setOutput("current_version", versions[0]?.version.name || null);
+      setOutput("current_version", versions[0] || null);
       endGroup();
 
       finish({
