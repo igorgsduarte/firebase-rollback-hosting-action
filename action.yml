@@ -2,8 +2,8 @@ name: "Rollback deploy on Firebase Hosting"
 description: "A GitHub Action to rollback a deploy on Firebase Hosting"
 author: "Igor Gottschalg (https://github.com/igorgottschalg)"
 branding:
-  icon: "globe"
-  color: "blue"
+  icon: "refresh-cw"
+  color: "gray-dark"
 runs:
   using: "node12"
   main: "bin/action.min.js"
