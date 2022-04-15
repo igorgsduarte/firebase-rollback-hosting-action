@@ -24,7 +24,7 @@ jobs:
         - uses: actions/checkout@v3
 
         # Get current active version
-        - uses: FirebaseExtended/action-hosting-deploy@v0
+        - uses: igorgottschalg/firebase-rollback-hosting-action@v1
             id: current_version
             with:
             firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
@@ -38,7 +38,7 @@ jobs:
             projectId: your-Firebase-project-ID
 
         # Rollback to last active version of step id current_version
-        - uses: FirebaseExtended/action-hosting-deploy@v0
+        - uses: igorgottschalg/firebase-rollback-hosting-action@v1
             with:
             firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
             projectId: your-Firebase-project-ID

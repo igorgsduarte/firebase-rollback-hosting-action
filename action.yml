@@ -1,5 +1,5 @@
 name: "Rollback deploy on Firebase Hosting"
-description: "A GitHub Action to reollback a deploy on Firebase Hosting"
+description: "A GitHub Action to rollback a deploy on Firebase Hosting"
 author: "Igor Gottschalg (https://github.com/igorgottschalg)"
 branding:
   icon: "globe"
