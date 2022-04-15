@@ -1,8 +1,8 @@
 # 🌎 Firebase Rollback Hosting Deploy GitHub Action
 
 - List deployed versions
-- Ger current active version
-- Rollack a specified version
+- Get the currently active version
+- Rollback a specified version
 
 ---
 
@@ -59,7 +59,7 @@ of your repository settings and add it as `FIREBASE_SERVICE_ACCOUNT`:
 
 ### `projectId` _{string}_
 
-The Firebase project that contains the Hosting site to which you
+The Firebase project contains the Hosting site to which you
 want to deploy. If left blank, you need to check in a `.firebaserc`
 file so that the Firebase CLI knows which Firebase project to use.
 
@@ -69,17 +69,17 @@ The ID of the channel to deploy to. If you leave this blank,
 a preview channel and its ID will be auto-generated per branch or PR.
 If you set it to **`live`**, the action deploys to the live channel of your default Hosting site.
 
-_You usually want to leave this blank_ so that each PR gets its own preview channel.
+_You usually want to leave this blank_ so that each PR gets its preview channel.
 An exception might be that you always want to deploy a certain branch to a
 long-lived preview channel (for example, you may want to deploy every commit
 from your `next` branch to a `preprod` preview channel).
 
 ### `versionName` _{string}_
 
-The versionName of the deployed version of site to rollback. If you leave this blank,
-the action will return all version and current active version on outputs.
+The versionName of the deployed version of the site to roll back. If you leave this blank,
+the action will return all versions and the currently active version on outputs.
 
-If you specify, will be rollback to version.
+If you specify, will be rollback to the version.
 
 ### `entryPoint` _{string}_
 
@@ -88,7 +88,7 @@ file relative to the root of your repository. Defaults to `.` (the root of your 
 
 ## Outputs
 
-Values emitted by this action that can be consumed by other actions later in your workflow
+Values emitted by this action can be consumed by other actions later in your workflow
 
 ### `releases`
 
