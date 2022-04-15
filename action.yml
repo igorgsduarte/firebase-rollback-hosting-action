@@ -5,7 +5,7 @@ branding:
   icon: "refresh-cw"
   color: "gray-dark"
 runs:
-  using: "node12"
+  using: "node16"
   main: "bin/action.min.js"
 inputs:
   firebaseServiceAccount:
