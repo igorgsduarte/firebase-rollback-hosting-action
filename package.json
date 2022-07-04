@@ -16,7 +16,7 @@
     "@types/tmp": "^0.2.0",
     "babel-jest": "^27.5.1",
     "dotenv": "^16.0.0",
-    "esbuild": "^0.14.36",
+    "esbuild": "^0.14.48",
     "husky": "^7.0.0",
     "jest": "^27.5.1",
     "prettier": "^2.1.2",
