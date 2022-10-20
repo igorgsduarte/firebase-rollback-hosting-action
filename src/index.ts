@@ -112,7 +112,7 @@ async function run() {
     finish({
       conclusion: "failure",
       output: {
-        title: "Release rollback failed",
+        title: "Failed",
         summary: `Error: ${e.message}`,
       },
     });
