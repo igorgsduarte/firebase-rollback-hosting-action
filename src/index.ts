@@ -6,6 +6,7 @@ import {
   startGroup,
 } from "@actions/core";
 import { existsSync } from "fs";
+import deleteChannel from "./deleteChannel";
 import { getReleases, setRelease } from "./release";
 
 // Inputs defined in action.yml
@@ -16,6 +17,7 @@ const googleApplicationCredentials = getInput("firebaseServiceAccount", {
 const channelId = getInput("channelId") || "live";
 const versionName = getInput("versionName");
 const entryPoint = getInput("entryPoint");
+const removeChannel = getInput("removeChannel");
 
 async function run() {
   let finish = (details: Object) => console.log(details);
@@ -41,47 +43,69 @@ async function run() {
     }
     endGroup();
 
-    if (!versionName) {
-      startGroup("Get last hosting releases");
-      const releases = await getReleases({
+    if (!removeChannel) {
+      if (!versionName) {
+        startGroup("Get last hosting releases");
+        const releases = await getReleases({
+          gacJson: JSON.parse(googleApplicationCredentials),
+          projectId,
+          channelId,
+        });
+
+        const versions = releases.map((release) => release.version.name);
+
+        setOutput("releases", versions);
+        setOutput("current_version", versions[0] || null);
+        endGroup();
+
+        finish({
+          conclusion: "success",
+          output: {
+            title: `The release list has been successfully retrieved!`,
+            summary: {
+              currenty_version: versions[0],
+              all_versions: versions,
+            },
+          },
+        });
+        return;
+      }
+
+      startGroup("Start a version rollback ...");
+
+      setRelease({
         gacJson: JSON.parse(googleApplicationCredentials),
         projectId,
         channelId,
+        versionName,
       });
 
-      const versions = releases.map((release) => release.version.name);
-
-      setOutput("releases", versions);
-      setOutput("current_version", versions[0] || null);
       endGroup();
 
       finish({
         conclusion: "success",
         output: {
-          title: `The release list has been successfully retrieved!`,
-          summary: {
-            currenty_version: versions[0],
-            all_versions: versions,
-          },
+          title: `The version ${versionName} as published with success!`,
         },
       });
-      return;
-    }
+    } else {
+      startGroup("Start remove channel");
 
-    startGroup("Start a version rollback ...");
-    setRelease({
-      gacJson: JSON.parse(googleApplicationCredentials),
-      projectId,
-      channelId,
-      versionName,
-    });
-    endGroup();
-    finish({
-      conclusion: "success",
-      output: {
-        title: `The version ${versionName} as published with success!`,
-      },
-    });
+      await deleteChannel({
+        gacJson: JSON.parse(googleApplicationCredentials),
+        projectId,
+        channelId: removeChannel,
+      });
+
+      endGroup();
+
+      finish({
+        conclusion: "success",
+        output: {
+          title: `The channel ${removeChannel} was removed!`,
+        },
+      });
+    }
   } catch (e) {
     setFailed(e.message);
 
