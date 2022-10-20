@@ -17,7 +17,7 @@ const googleApplicationCredentials = getInput("firebaseServiceAccount", {
 const channelId = getInput("channelId") || "live";
 const versionName = getInput("versionName");
 const entryPoint = getInput("entryPoint");
-const removeChannel = getInput("removeChannel");
+const removeChannel = getInput("deleteChannel");
 
 async function run() {
   let finish = (details: Object) => console.log(details);
