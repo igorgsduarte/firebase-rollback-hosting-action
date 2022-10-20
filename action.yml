@@ -20,6 +20,11 @@ inputs:
     description: "The ID of the channel to deploy to. If you leave this blank,
       a preview channel and its ID will be auto-generated per branch or PR."
     required: false
+  deleteChannel:
+    description:
+      "The ID of the channel to remove. Leave's blank with you don't want
+      to remove a preview channel."
+    required: false
   versionName:
     description: "The versionName of deploy to rollback"
     required: false
