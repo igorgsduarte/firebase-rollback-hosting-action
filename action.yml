@@ -6,7 +6,7 @@ branding:
   color: "gray-dark"
 runs:
   using: "node20"
-  main: "bin/action.min.js"
+  main: "src/index.js"
 inputs:
   firebaseServiceAccount:
     description: "Firebase service account JSON"
